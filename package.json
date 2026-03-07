@@ -1,101 +1,88 @@
 {
-  "name": "svelte-os-themes",
-  "type": "module",
-  "license": "MIT",
-  "version": "1.0.0",
-  "main": "./dist/index.js",
-  "svelte": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "svelte": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
-    "./ThemeProvider": {
-      "types": "./dist/ThemeProvider.d.ts",
-      "svelte": "./dist/ThemeProvider.js"
-    },
-    "./useTheme": {
-      "types": "./dist/useTheme.svelte.d.ts",
-      "svelte": "./dist/useTheme.svelte.js",
-      "default": "./dist/useTheme.svelte.js"
-    },
-    "./parseTheme": {
-      "types": "./dist/parseTheme.d.ts",
-      "default": "./dist/parseTheme.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist",
-    "!dist/**/*.test.*",
-    "!dist/**/*.spec.*"
-  ],
-  "keywords": [
-    "Svelte",
-    "Svelte Themes",
-    "ThemeProvider",
-    "Themes",
-    "Dark Mode"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/calvo-jp/svelte-os-themes.git"
-  },
-  "bugs": {
-    "url": "https://github.com/calvo-jp/svelte-os-themes/issues"
-  },
-  "author": {
-    "name": "John Paul Calvo",
-    "email": "calvojp92@gmail.com"
-  },
-  "packageManager": "pnpm@10.30.3",
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build && npm run package",
-    "preview": "vite preview",
-    "package": "svelte-kit sync && svelte-package && publint",
-    "prepublishOnly": "npm run package",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "release": "release-it"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.6",
-    "@eslint/js": "^10.0.1",
-    "@sveltejs/adapter-vercel": "^6.3.3",
-    "@sveltejs/kit": "^2.53.4",
-    "@sveltejs/package": "^2.5.7",
-    "@sveltejs/vite-plugin-svelte": "^6.2.4",
-    "@tailwindcss/vite": "^4.2.1",
-    "publint": "^0.3.18",
-    "release-it": "^19.2.4",
-    "svelte": "^5.53.7",
-    "svelte-check": "^4.4.4",
-    "tailwindcss": "^4.2.1",
-    "tslib": "^2.8.1",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1"
-  },
-  "peerDependencies": {
-    "svelte": "^5.0.0"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${npm.name} v${version}",
-      "tagName": "${npm.name}@${version}"
-    },
-    "github": {
-      "release": false
-    },
-    "hooks": {
-      "before:init": [
-        "pnpm check"
-      ],
-      "after:bump": [
-        "pnpm package"
-      ]
-    }
-  }
+	"name": "svelte-os-themes",
+	"type": "module",
+	"license": "MIT",
+	"version": "1.0.0",
+	"main": "./dist/index.js",
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"keywords": [
+		"Svelte",
+		"Svelte Themes",
+		"ThemeProvider",
+		"Themes",
+		"Dark Mode"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CalvoJohnPaul/svelte-os-themes.git"
+	},
+	"bugs": {
+		"url": "https://github.com/CalvoJohnPaul/svelte-os-themes/issues"
+	},
+	"author": {
+		"name": "John Paul Calvo",
+		"email": "looselytiedshoelace@gmail.com"
+	},
+	"packageManager": "pnpm@10.30.3",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && npm run package",
+		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "npm run package",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"release": "release-it"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.6",
+		"@eslint/js": "^10.0.1",
+		"@sveltejs/adapter-vercel": "^6.3.3",
+		"@sveltejs/kit": "^2.53.4",
+		"@sveltejs/package": "^2.5.7",
+		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"@tailwindcss/vite": "^4.2.1",
+		"publint": "^0.3.18",
+		"release-it": "^19.2.4",
+		"svelte": "^5.53.7",
+		"svelte-check": "^4.4.4",
+		"tailwindcss": "^4.2.1",
+		"tslib": "^2.8.1",
+		"typescript": "^5.9.3",
+		"vite": "^7.3.1"
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0"
+	},
+	"release-it": {
+		"git": {
+			"commitMessage": "chore: release ${npm.name} v${version}",
+			"tagName": "${npm.name}@${version}"
+		},
+		"github": {
+			"release": false
+		},
+		"hooks": {
+			"before:init": [
+				"pnpm check"
+			],
+			"after:bump": [
+				"pnpm package"
+			]
+		}
+	}
 }
