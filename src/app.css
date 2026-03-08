@@ -1,3 +1,13 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@layer base {
+	button {
+		cursor: pointer;
+	}
+
+	[hidden] {
+		display: none !important;
+	}
+}
 
 @custom-variant dark (&:where(.dark, .dark *));

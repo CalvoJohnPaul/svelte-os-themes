@@ -21,15 +21,27 @@ let theme = useTheme();
 		<div
 			class="mt-6 w-full space-y-4 lg:flex lg:max-w-lg lg:space-y-0 lg:gap-4"
 		>
-			<Button {...theme.getTriggerProps({value: 'light'})}>
+			<Button
+				onclick={() => {
+				theme.current = 'light'
+			}}
+			>
 				<SunIcon />
 				<span>Light</span>
 			</Button>
-			<Button {...theme.getTriggerProps({value: 'dark'})}>
+			<Button
+				onclick={() => {
+				theme.current = 'dark'
+			}}
+			>
 				<MoonIcon />
 				<span>Dark</span>
 			</Button>
-			<Button {...theme.getTriggerProps({value: 'system'})}>
+			<Button
+				onclick={() => {
+				theme.current = 'system'
+			}}
+			>
 				<LaptopIcon />
 				<span>System</span>
 			</Button>

@@ -1,6 +1,6 @@
 # Svelte OS Themes
 
-Lightweight dark mode helper for [Svelte](https://svelte.dev/).
+Light-weight dark mode helper for [Svelte](https://svelte.dev/).
 
 ## Installation
 
@@ -41,13 +41,28 @@ npm install svelte-os-themes
   $inspect(theme.current);
 </script>
 
-<button {...theme.getTriggerProps({value: 'light'})}>
+<button
+  type="button"
+  onclick={() => {
+    theme.current = 'light';
+  }}
+>
   Light
 </button>
-<button {...theme.getTriggerProps({value: 'dark'})}>
+<button
+  type="button"
+  onclick={() => {
+    theme.current = 'dark';
+  }}
+>
   Dark
 </button>
-<button {...theme.getTriggerProps({value: 'system'})}>
+<button
+  type="button"
+  onclick={() => {
+    theme.current = 'system';
+  }}
+>
   System
 </button>
 ```
@@ -116,57 +131,6 @@ npm install svelte-os-themes
 - `current`
 
   Returns the current theme when used as a getter and sets the theme when used as a setter.
-
-  ```svelte
-  <script>
-    import { useTheme } from 'svelte-os-themes';
-
-    let theme = useTheme();
-  </script>
-
-  <div>Current Theme: {theme.current}</div>
-
-  <button
-    type="button"
-    onclick={function () {
-      theme.current = 'light';
-    }}
-  >
-    Light
-  </button>
-  <button
-    type="button"
-    onclick={function () {
-      theme.current = 'dark';
-    }}
-  >
-    Dark
-  </button>
-  <button
-    type="button"
-    onclick={function () {
-      theme.current = 'system';
-    }}
-  >
-    System
-  </button>
-  ```
-
-- `getTriggerProps`
-
-  Returns button attributes used to trigger a specific theme.
-
-  ```svelte
-  <script>
-    import { useTheme } from 'svelte-os-themes';
-
-    let theme = useTheme();
-  </script>
-
-  <button {...theme.getTriggerProps({value: 'light'})}>Light</button>
-  <button {...theme.getTriggerProps({value: 'dark'})}>Dark</button>
-  <button {...theme.getTriggerProps({value: 'system'})}>System</button>
-  ```
 
 ### parseTheme
 

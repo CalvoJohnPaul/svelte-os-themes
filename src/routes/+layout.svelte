@@ -5,4 +5,4 @@ import '../app.css';
 let {children} = $props();
 </script>
 
-<ThemeProvider>{@render children()}</ThemeProvider>
+<ThemeProvider system>{@render children()}</ThemeProvider>

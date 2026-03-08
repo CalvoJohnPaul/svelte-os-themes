@@ -1,4 +1,3 @@
-import type {HTMLButtonAttributes} from 'svelte/elements';
 import {parseTheme} from './parseTheme.js';
 import type {Theme} from './types.js';
 
@@ -32,14 +31,9 @@ export interface CreateThemeOptions {
 	scriptNonce?: string;
 }
 
-export interface ThemeTriggerProps {
-	value: Theme;
-}
-
 export interface CreateThemeReturn {
 	get current(): Theme;
 	set current(value: Theme | null | undefined);
-	getTriggerProps(props: ThemeTriggerProps): HTMLButtonAttributes;
 }
 
 const defaultOptions = {
@@ -63,18 +57,6 @@ export function createTheme(
 	});
 
 	let theme = $state(options_.fallback);
-
-	function getTriggerProps(props: ThemeTriggerProps): HTMLButtonAttributes {
-		return {
-			type: 'button',
-			onclick() {
-				theme = props.value;
-			},
-			'aria-label': 'Enable %s mode'.replace('%s', props.value),
-			'data-state': theme === props.value ? 'on' : 'off',
-			'data-value': props.value,
-		};
-	}
 
 	$effect(() => {
 		theme = parseTheme(
@@ -147,14 +129,13 @@ export function createTheme(
 		get current(): Theme {
 			return theme;
 		},
-		set current(newTheme: Theme | null | undefined) {
-			if (newTheme) {
-				theme = newTheme;
+		set current(value: Theme | null | undefined) {
+			if (value) {
+				theme = value;
 			} else {
 				theme = options_.fallback;
 			}
 		},
-		getTriggerProps,
 	};
 }
 
