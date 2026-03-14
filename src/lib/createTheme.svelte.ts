@@ -27,8 +27,7 @@ export interface CreateThemeOptions {
 	 * @default true
 	 */
 	colorScheme?: boolean;
-	styleNonce?: string;
-	scriptNonce?: string;
+	nonce?: string;
 }
 
 export interface CreateThemeReturn {
@@ -58,7 +57,7 @@ export function createTheme(
 
 	let theme = $state(options_.fallback);
 
-	$effect(() => {
+	$effect.pre(() => {
 		theme = parseTheme(
 			window.localStorage.getItem(options_.storageKey),
 			options_.fallback,
@@ -67,8 +66,20 @@ export function createTheme(
 
 	$effect(() => {
 		const html = document.documentElement;
+		const head = document.head;
+		const style = document.createElement('style');
 
-		html.classList.add('svelte-os-themes__no-transition');
+		if (options_.nonce) {
+			style.setAttribute('nonce', options_.nonce);
+		}
+
+		style.appendChild(
+			document.createTextNode(
+				`*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
+			),
+		);
+
+		head.appendChild(style);
 
 		const originalTheme = theme;
 		const resolvedTheme =
@@ -87,12 +98,14 @@ export function createTheme(
 			html.setAttribute(options_.attribute, resolvedTheme);
 		}
 
-		if (options_.colorScheme) html.style.colorScheme = resolvedTheme;
+		if (options_.colorScheme) {
+			html.style.colorScheme = resolvedTheme;
+		}
 
 		window.localStorage.setItem(options_.storageKey, originalTheme);
 
 		setTimeout(() => {
-			html.classList.remove('svelte-os-themes__no-transition');
+			head.removeChild(style);
 		}, 1);
 	});
 
@@ -139,39 +152,6 @@ export function createTheme(
 	};
 }
 
-createTheme.style = (
-	props: CreateThemeOptions | (() => CreateThemeOptions),
-) => {
-	const options_ = $derived.by(() => {
-		const userOptions = typeof props === 'function' ? props() : props;
-
-		return {
-			...defaultOptions,
-			...userOptions,
-		};
-	});
-
-	const value = $derived(`
-  <style ${assignNonce(options_.styleNonce)}>
-    .svelte-os-themes__no-transition,
-    .svelte-os-themes__no-transition *,
-    .svelte-os-themes__no-transition *::after,
-    .svelte-os-themes__no-transition *::before {
-      -webkit-transition: none !important;
-      -moz-transition: none !important;
-      -o-transition: none !important;
-      transition: none !important;
-    }
-  </style>
-  `);
-
-	return {
-		get value() {
-			return value;
-		},
-	};
-};
-
 createTheme.script = (
 	props: CreateThemeOptions | (() => CreateThemeOptions),
 ) => {
@@ -184,11 +164,11 @@ createTheme.script = (
 		};
 	});
 
-	const value = $derived(`
-  <script ${assignNonce(options_.scriptNonce)}>
-    (function(k, a, f, c) {
+	const value = $derived(
+		`
+  <script ${options_.nonce ? `nonce="${options_.nonce}"` : ''}>(function(k, a, f, c) {
       const h = document.documentElement;
-      const q = window.matchMedia('(prefers-color-scheme: dark)')
+      const q = window.matchMedia('(prefers-color-scheme: dark)');
       const s = window.localStorage.getItem(k)?.toLowerCase().trim();
 
       const l = [
@@ -214,16 +194,18 @@ createTheme.script = (
       '${options_.storageKey}',
       '${options_.attribute}',
       '${options_.fallback}',
-      ${options_.colorScheme},
+      ${options_.colorScheme}
     );
   </script>
-  `);
+  `
+			.replace(/\n+/g, '')
+			.replace(/\s+/g, ' ')
+			.trim(),
+	);
 
 	return {
-		get value() {
+		get current() {
 			return value;
 		},
 	};
 };
-
-const assignNonce = (nonce?: string) => (nonce ? `nonce="${nonce}"` : '');

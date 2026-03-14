@@ -24,8 +24,7 @@ npm install svelte-os-themes
   storageKey="theme"
   colorScheme={true}
   system={true}
-  styleNonce=""
-  scriptNonce=""
+  nonce=""
 >
   {@render children()}
 </ThemeProvider>
@@ -108,16 +107,9 @@ npm install svelte-os-themes
   accepted values: `true`, `false`<br/>
   default value: `true`
 
-- `scriptNonce`
+- `nonce`
 
-  The nonce to use for the injected script.
-
-  accepted values: `<string>`<br/>
-  default value: `undefined`
-
-- `styleNonce`
-
-  The nonce to use for the injected style.
+  The nonce to use for the injected script and transition-suppression style.
 
   accepted values: `<string>`<br/>
   default value: `undefined`
