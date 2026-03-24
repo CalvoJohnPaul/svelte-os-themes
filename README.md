@@ -1,5 +1,7 @@
 # Svelte OS Themes
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open-0ea5e9)](https://svelte-os-themes.vercel.app)
+
 Light-weight dark mode helper for [Svelte](https://svelte.dev/).
 
 ## Installation
