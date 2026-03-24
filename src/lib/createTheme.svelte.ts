@@ -55,13 +55,10 @@ export function createTheme(
 		};
 	});
 
-	let theme = $state(options_.fallback);
+	let theme = $derived(options_.fallback);
 
 	$effect.pre(() => {
-		theme = parseTheme(
-			window.localStorage.getItem(options_.storageKey),
-			options_.fallback,
-		);
+		theme = parseTheme(window.localStorage.getItem(options_.storageKey), options_.fallback);
 	});
 
 	$effect(() => {
@@ -152,9 +149,7 @@ export function createTheme(
 	};
 }
 
-createTheme.script = (
-	props: CreateThemeOptions | (() => CreateThemeOptions),
-) => {
+createTheme.script = (props: CreateThemeOptions | (() => CreateThemeOptions)) => {
 	const options_ = $derived.by(() => {
 		const userOptions = typeof props === 'function' ? props() : props;
 
